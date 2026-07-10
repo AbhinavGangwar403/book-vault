@@ -49,7 +49,7 @@ async function getHomePage(req, res) {
 
         console.log(err);
 
-        res.status(500).send("Error");
+        res.status(500).render("pages/500");
 
     }
 

@@ -34,9 +34,18 @@
 <a href = "/books/edit/<%= book.id %>">Edit Book</a>
 
 <br><br>
-<form action = "/books/delete/<%= book.id %>" method = "POST">
+<form
+action="/books/delete/<%= book.id %>"
+method="POST"
 
-    <button type = "submit">Delete Book</button>
+onsubmit="return confirm('Delete this book permanently?');"
+>
+
+<button class="danger-btn">
+
+Delete Book
+
+</button>
 
 </form>
 

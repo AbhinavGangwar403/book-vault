@@ -109,7 +109,7 @@ async function getDashboard(req,res){
     }catch(error){
 
         console.error(error);
-        res.status(500).send("Error in Dashboard");
+        res.status(500).render("pages/500");
     }
 }
 

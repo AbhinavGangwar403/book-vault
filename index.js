@@ -49,6 +49,10 @@ app.use("/books",bookRoutes);
 
 app.use("/dashboard",dashboardRoutes);
 
+app.use((req, res) => {
+    res.status(404).render("pages/404");
+});
+
 app.listen(port,()=>{
     console.log(`server running on port ${port}`);
 });

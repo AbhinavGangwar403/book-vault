@@ -91,7 +91,7 @@ async function login(req,res){
 
         console.error(error);
 
-        res.status(500).send("Login Failed");
+        res.status(500).render("pages/500");
 
     }
 

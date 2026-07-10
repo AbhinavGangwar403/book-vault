@@ -116,7 +116,7 @@ async function getBooks (req, res) {
 
         console.error(error);
 
-        res.status(500).send("Database Error");
+        res.status(500).render("pages/500");
     }
 }
 
@@ -158,6 +158,26 @@ async function createBook(req, res) {
                 status,
                 tags
             } = req.body;
+
+            if(!title || !author){
+
+                return res.status(400).send(
+                    "Title and Author are required."
+                );
+
+            }
+
+            if(rating){
+
+                if(rating<1 || rating>10){
+
+                    return res.status(400).send(
+                        "Rating must be between 1 and 10."
+                    );
+
+                }
+
+            }
 
             const coverUrl = getCoverUrl(isbn);
 
@@ -259,7 +279,7 @@ async function createBook(req, res) {
 
             console.error(error);
 
-            res.status(500).send("Error Saving Book");
+            res.status(500).render("pages/500");
         }
     
 }
@@ -300,7 +320,7 @@ async function getEditBookForm(req,res){
 
         console.error(error);
 
-        res.status(500).send("Internal server error");
+        res.status(500).render("pages/500");
     }
 }
 
@@ -317,6 +337,26 @@ async function updateBook(req,res){
             status,
             tags
         } = req.body;
+
+        if(!title || !author){
+
+            return res.status(400).send(
+                "Title and Author are required."
+            );
+
+        }
+
+        if(rating){
+
+            if(rating<1 || rating>10){
+
+                return res.status(400).send(
+                    "Rating must be between 1 and 10."
+                );
+
+            }
+
+        }
 
         const coverUrl = getCoverUrl(isbn);
 
@@ -411,7 +451,7 @@ async function updateBook(req,res){
 
     }catch(error){
         console.error(error);
-        res.status(500).send("Update failed");
+        res.status(500).render("pages/500");
     }
 }
 
@@ -423,7 +463,7 @@ async function deleteBook(req,res){
 
     }catch(error){
         console.error(error);
-        res.status(500).send("Deletion failed");
+        res.status(500).render("pages/500");
     }
 }
 
