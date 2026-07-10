@@ -1,0 +1,268 @@
+<%- include("../partials/header") %>
+
+<section class="hero">
+
+    <h1>
+        Build Your Personal Library
+    </h1>
+
+    <p>
+        Organize your books, write reviews, discover insights,
+        and keep your reading journey in one place.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a
+            href="/books"
+            class="primary-btn"
+        >
+            Browse Library
+        </a>
+
+        <a
+            href="/books/new"
+            class="secondary-btn"
+        >
+            Add New Book
+        </a>
+
+    </div>
+
+</section>
+
+<h2>Featured Books</h2>
+
+<% if(featuredBooks.length === 0){ %>
+
+    <p>No featured books available.</p>
+
+<% } else { %>
+
+<div class="books-grid">
+
+    <% featuredBooks.forEach(book => { %>
+
+        <div class="book-card">
+
+            <div class="book-cover">
+
+                <% if(book.cover_url){ %>
+
+                    <img
+                        src="<%= book.cover_url %>"
+                        alt="<%= book.title %>"
+                    >
+
+                <% } else { %>
+
+                    <div class="placeholder-cover">
+                        No Cover
+                    </div>
+
+                <% } %>
+
+            </div>
+
+            <div class="book-content">
+
+                <h3>
+                    <%= book.title %>
+                </h3>
+
+                <p>
+                    <%= book.author %>
+                </p>
+
+                <span class="rating-badge">
+                    ⭐ <%= book.rating || "N/A" %>
+                </span>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+</div>
+
+<% } %>
+
+<section class="home-stats">
+
+    <h2>Library Overview</h2>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <h3>📚</h3>
+
+            <h2>
+                <%= stats.total_books %>
+            </h2>
+
+            <p>Total Books</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>⭐</h3>
+
+            <h2>
+                <%= stats.average_rating || "0" %>
+            </h2>
+
+            <p>Average Rating</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>✍️</h3>
+
+            <h2>
+                <%= stats.authors %>
+            </h2>
+
+            <p>Authors</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="recent-books">
+
+    <h2>Recently Added</h2>
+
+    <% if(recentBooks.length === 0){ %>
+
+        <p>No books have been added yet.</p>
+
+    <% } else { %>
+
+    <div class="books-grid">
+
+        <% recentBooks.forEach(book => { %>
+
+            <div class="book-card">
+
+                <div class="book-cover">
+
+                    <% if(book.cover_url){ %>
+
+                        <img
+                            src="<%= book.cover_url %>"
+                            alt="<%= book.title %>"
+                        >
+
+                    <% } else { %>
+
+                        <div class="placeholder-cover">
+                            No Cover
+                        </div>
+
+                    <% } %>
+
+                </div>
+
+                <div class="book-content">
+
+                    <h3>
+                        <%= book.title %>
+                    </h3>
+
+                    <p>
+                        <%= book.author %>
+                    </p>
+
+                    <a
+                        href="/books/<%= book.id %>"
+                        class="primary-btn"
+                    >
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+    <% } %>
+
+</section>
+
+<section class="features">
+
+    <h2>
+        Why BookVault?
+    </h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <h3>
+                📚 Organize
+            </h3>
+
+            <p>
+                Store all your books in one organized place.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <h3>
+                ⭐ Review
+            </h3>
+
+            <p>
+                Rate books and write personal reviews.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <h3>
+                📊 Analyze
+            </h3>
+
+            <p>
+                Track your reading habits with insightful statistics.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="cta">
+
+    <h2>
+        Ready to build your personal library?
+    </h2>
+
+    <p>
+        Add your next favorite book today.
+    </p>
+
+    <a
+        href="/books/new"
+        class="primary-btn"
+    >
+        Add New Book
+    </a>
+
+</section>
+
+<%- include("../partials/footer") %>

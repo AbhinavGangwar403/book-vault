@@ -1,0 +1,79 @@
+<%-include ("../partials/header")%>
+<h1>Add New Book</h1>
+
+<form action ="/books" method = "POST">
+
+    <input
+    type = "text"
+    name = "title"
+    placeholder = "Book Title"
+    required
+    >
+
+    <br><br>
+
+    <input
+    type = "text"
+    name = "author"
+    placeholder = "Author"
+    required
+    >
+
+    <br><br>
+
+    <input
+    type = "text"
+    name = "isbn"
+    placeHolder = "ISBN"
+    >
+
+    <input
+    type = "number"
+    name = "rating"
+    min = "1"
+    max = "10"
+    placeholder="Rating"
+    >
+
+    <br><br>
+
+    <input
+        type="text"
+        name="tags"
+        placeholder="Fantasy, Adventure, Magic"
+    >
+
+    <br><br>
+
+    <textarea
+        name = "review"
+        placeholder = "Review">
+    </textarea>
+
+    <br><br>
+
+    <select name="status">
+
+    <option value="Want To Read" selected>
+        Want To Read
+    </option>
+
+    <option value="Reading">
+        Reading
+    </option>
+
+    <option value="Completed">
+        Completed
+    </option>
+
+    </select>
+
+    <br><br>
+
+    <button type = "submit">
+        Save Book
+    </button>
+
+</form>
+
+<%- include("../partials/footer")%>

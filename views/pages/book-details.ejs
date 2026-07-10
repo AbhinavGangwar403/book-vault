@@ -1,0 +1,44 @@
+<%- include("../partials/header")%>
+
+<h1><%= book.title %></h1>
+
+<p>
+    <strong>Author:</strong>
+    <%= book.author %>
+</p>
+
+<p>
+    <strong>ISBN:</strong>
+    <%= book.isbn||"Not available" %>
+</p>
+
+<p>
+    <strong>Rating:</strong>
+    <%= book.rating?book.rating+"/10":"Not available" %>
+</p>
+
+<p>
+    <strong>Status:</strong>
+    <%= book.status %>
+</p>
+
+<p>
+    <strong>Review:</strong>
+</p>
+
+<p>
+    <%= book.review||"No review available." %>
+</p>
+
+<br><br>
+<a href = "/books/edit/<%= book.id %>">Edit Book</a>
+
+<br><br>
+<form action = "/books/delete/<%= book.id %>" method = "POST">
+
+    <button type = "submit">Delete Book</button>
+
+</form>
+
+
+<%- include("../partials/footer")%>

@@ -1,0 +1,170 @@
+<%- include("../partials/header") %>
+
+<h1>My Library</h1>
+
+<form class = "search-form">
+    <input 
+        type = "text"
+        name = "search"
+        placeholder="search by title or author"
+        value = "<%= search %>"
+    >
+
+    <select name = "sort">
+        <option 
+            value = "newest"
+            <%= sort==="newest"?"selected":""%>>
+            Newest
+        </option>
+
+        <option 
+            value = "oldest"
+            <%= sort==="oldest"?"selected":""%>>
+            Oldest
+        </option>
+
+        <option 
+            value = "title-asc"
+            <%= sort==="title-asc"?"selected":""%>>
+            Title A-Z
+        </option>
+
+        <option 
+            value = "title-desc"
+            <%= sort==="title-desc"?"selected":""%>>
+            Title Z-A
+        </option>
+
+        <option 
+            value = "rating-desc"
+            <%= sort==="rating-desc"?"selected":""%>>
+            Highest Rating
+        </option>
+
+        <option 
+            value = "rating-asc"
+            <%= sort==="rating-asc"?"selected":""%>>
+            Lowest Rating
+        </option>
+    </select>
+
+    <select name = "status">
+        <option 
+        value = "all"
+        <%=status==="all"?"selected":""%>>
+        All Status
+        </option>
+
+        <option 
+        value = "Want To Read"
+        <%=status==="Want To Read"?"selected":""%>>
+        Want to Read
+        </option>
+
+        <option 
+        value = "Reading"
+        <%=status==="Reading"?"selected":""%>>
+        Reading
+        </option>
+
+        <option 
+        value = "Completed"
+        <%=status==="Completed"?"selected":""%>>
+        Completed
+        </option>
+    </select>
+
+    <select name="tag">
+
+        <option value="all" <%= tag === "all" ? "selected" : "" %>>
+            All Tags
+        </option>
+
+        <% tags.forEach(tagItem=>{ %>
+
+            <option
+                value="<%= tagItem.id %>"
+                <%= tag == tagItem.id.toString() ? "selected" : "" %>>
+                <%= tagItem.name %>
+            </option>
+
+        <% }) %>
+
+    </select>
+
+    
+
+    <button type = "submit">Search</button>
+</form>
+
+<div class="books-grid">
+
+    <% books.forEach(book => { %>
+
+        <div class="book-card">
+
+            <div class="book-cover">
+
+                <% if(book.cover_url){ %>
+
+                    <img
+                        src="<%= book.cover_url %>"
+                        alt="<%= book.title %>"
+                    >
+
+                <% } else { %>
+
+                    <div class="placeholder-cover">
+                        No Cover
+                    </div>
+
+                <% } %>
+
+            </div>
+
+            <div class="book-content">
+
+                <h2>
+                    <%= book.title %>
+                </h2>
+
+                <p>
+                    <%= book.author %>
+                </p>
+
+                <% if(book.tags){ %>
+                <div class="tags-container">
+                    <% book.tags.split(',').forEach(tag => { %>
+                        <span class="tag-badge">
+                            <%= tag %>
+                        </span>
+                    <% }) %>
+                </div>
+                <% } %>
+
+                <span class="rating-badge">
+                    ⭐ <%= book.rating||"N/A" %>/10
+                </span>
+
+                <span class="status-badge">
+                    <%= book.status %>
+                </span>
+
+                <br><br>
+
+                <a
+                    href="/books/<%= book.id %>"
+                    class="details-btn"
+                >
+                    View Details
+                </a>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+</div>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,111 @@
+<%- include("../partials/header")%>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h1>Dashboard</h1>
+
+<div class = "stats-grid">
+
+    <div class = "stat-card">
+        <h3>Total Books</h3>
+        <p><%= totalBooks %></p>
+    </div>
+
+    <div class = "stat-card">
+        <h3>Average Rating</h3>
+        <p><%= avgRating %></p>
+    </div>
+
+    <div class = "stat-card">
+        <h3>Completed</h3>
+        <p><%= completed %></p>
+    </div>
+
+    <div class = "stat-card">
+        <h3>Reading</h3>
+        <p><%= reading %></p>
+    </div>
+
+    <div class = "stat-card">
+        <h3>Want To Read</h3>
+        <p><%= wantToRead %></p>
+    </div>
+</div>
+
+<div class = "highest-rated-card">
+    <h2>Highest Rated Book</h2>
+    
+    <% if(highestRated){ %>
+        <h3>
+            <%= highestRated.title %>
+        </h3>
+
+        <p>
+            ⭐ <%= highestRated.rating %>
+        </p>
+
+    <% } else { %>
+        <p>No books available.</p>
+    <% } %>
+
+
+</div>
+
+<div class = "chart-card">
+    <canvas id = "statusChart"></canvas>
+</div>
+
+<div class = "chart-card">
+    <canvas id = "ratingChart"></canvas>
+</div>
+
+<script>
+
+const statusData =
+<%- JSON.stringify(statusData) %>;
+
+const ratingData =
+<%- JSON.stringify(ratingData) %>;
+
+new Chart(
+    document.getElementById("statusChart"),
+    {
+        type:"pie",
+        data:{
+            labels:
+                statusData.map(
+                    item => item.status
+                ),
+            datasets:[{
+                data:
+                    statusData.map(
+                        item => item.count
+                    )
+            }]
+        }
+    }
+);
+
+new Chart(
+    document.getElementById("ratingChart"),
+    {
+        type:"bar",
+        data:{
+            labels:
+                ratingData.map(
+                    item => item.rating
+                ),
+            datasets:[{
+                label:"Books",
+                data:
+                    ratingData.map(
+                        item => item.count
+                    )
+            }]
+        }
+    }
+);
+
+</script>
+
+<%- include("../partials/footer")%>

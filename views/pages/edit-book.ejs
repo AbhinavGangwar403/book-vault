@@ -1,0 +1,85 @@
+<%- include("../partials/header")%>
+
+<h1>Edit Book</h1>
+
+<form action = "/books/update/<%= book.id%>"
+    method = "POST"
+>
+
+    <input 
+        type = "text"
+        name = "title"
+        value = "<%= book.title %>"
+        required
+    >
+    <br><br>
+    <input  
+        type = "text"
+        name = "author"
+        value = "<%= book.author %>"
+        required
+    >
+    <br><br>
+    <input
+        type = "text"
+        name = "isbn"
+        value = "<%= book.isbn||''%>"
+    >
+
+    <br><br>
+    <input
+        type = "number"
+        name = "rating"
+        min = "1"
+        max = "10"
+        value = "<%= book.rating||'' %>"
+    >
+
+    <br><br>
+
+    <label>Tags</label>
+
+    <input
+        type="text"
+        name="tags"
+        value="<%= tagsString %>"
+        placeholder="Fantasy, Adventure, Magic">
+
+    <br><br>
+    
+    <textarea name = "review"><%= book.review||'' %>
+    </textarea>
+
+    <br><br>
+
+    <select name="status">
+
+    <option
+        value="Want To Read"
+        <%= book.status === "Want To Read" ? "selected" : "" %>>
+        Want To Read
+    </option>
+
+    <option
+        value="Reading"
+        <%= book.status === "Reading" ? "selected" : "" %>>
+        Reading
+    </option>
+
+    <option
+        value="Completed"
+        <%= book.status === "Completed" ? "selected" : "" %>>
+        Completed
+    </option>
+
+    </select>
+
+    <br><br>
+
+    <button type = "submit">
+        Update Book
+    </button>
+
+</form>
+
+<%- include("../partials/footer")%>
